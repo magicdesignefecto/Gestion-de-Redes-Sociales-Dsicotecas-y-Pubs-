@@ -442,6 +442,9 @@
     <!-- YouTube IFrame API -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
+    <!-- Audio element for sound effects -->
+    <audio id="button-sound" src="https://cdn.pixabay.com/download/audio/2022/08/12/audio_21d1ba0130.mp3" preload="auto"></audio>
+
     <script>
         // YouTube Player variables should be global for the API callback
         var player;
@@ -623,6 +626,19 @@
             if(videoOverlay) {
                 videoOverlay.addEventListener('click', togglePlay);
             }
+
+            // Sound Effect Logic
+            const buttonSound = document.getElementById('button-sound');
+            const allClickableElements = document.querySelectorAll('a, button');
+
+            allClickableElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    if (buttonSound) {
+                        buttonSound.currentTime = 0;
+                        buttonSound.play().catch(e => console.error("Error playing sound:", e));
+                    }
+                });
+            });
 
         });
     </script>
